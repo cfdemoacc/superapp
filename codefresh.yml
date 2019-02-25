@@ -1,0 +1,13 @@
+version: '1.0'
+steps:
+  fetch_community_chart:
+    title: Download latest HackMD chart
+    image: codefresh/cfstep-helm:latest
+    commands:
+      - helm fetch stable/hackmd --untar
+  push_to_helm_repo:
+    title: Push HackMD chart to Helm repo
+    image: codefresh/cfstep-helm:latest
+    environment:
+      - ACTION=push
+      - CHART_REF=hackmd

@@ -1,7 +1,7 @@
 releases:
-  - name: superapp-{{ env "RELEASE_NAME" | default "local" }}
-    namespace: {{ env "RELEASE_NAME" | default "local" }}
+  - name: superapp-{{ env "NAMESPACE" | default "local" }}
+    namespace: {{ env "NAMESPACE" | default "local" }}
     chart: ./charts/superapp
     values:
     - image:
-        tag: {{ env "RELEASE_NAME" | default "latest" }}
+        tag: {{ env "NAMESPACE" | default "latest" }}

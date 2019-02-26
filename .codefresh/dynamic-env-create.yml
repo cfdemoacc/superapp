@@ -26,5 +26,5 @@ steps:
     working_directory: ${{main_clone}}/deploy/
     commands:
       - kubectl config use-context "$KUBE_CONTEXT"
-      - export RELEASE_NAME="pr-${{CF_PULL_REQUEST_NUMBER}}"
+      - export NAMESPACE="pr-${{CF_PULL_REQUEST_NUMBER}}"
       - helmfile apply

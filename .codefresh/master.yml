@@ -16,4 +16,5 @@ steps:
     image: cablespaghetti/helmfile-docker:0.0.3
     working_directory: ${{main_clone}}/deploy/
     commands:
+      - kubectl config use-context "$KUBE_CONTEXT"
       - helmfile apply

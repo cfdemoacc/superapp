@@ -1,7 +1,7 @@
 releases:
-  - name: superapp-{{ env "CF_BRANCH_TAG_NORMALIZED" | default "local" }}
-    namespace: {{ env "CF_BRANCH_TAG_NORMALIZED" | default "local" }}
+  - name: superapp-{{ env "RELEASE_NAME" | default "local" }}
+    namespace: {{ env "RELEASE_NAME" | default "local" }}
     chart: ./charts/superapp
     values:
     - image:
-        tag: {{ env "CF_BRANCH_TAG_NORMALIZED" | default "latest" }}
+        tag: {{ env "DOCKER_TAG" | default "latest" }}

@@ -10,7 +10,7 @@ steps:
   push_image:
     type: push
     candidate: '${{build_image}}'
-    tag: 'branch-${{CF_BRANCH_TAG_NORMALIZED}}'
+    tag: 'pr-${{CF_PULL_REQUEST_NUMBER}}'
     registry: dockerhub
 
   deploy_chart:
@@ -18,5 +18,5 @@ steps:
     working_directory: ${{main_clone}}/deploy/
     commands:
       - kubectl config use-context "$KUBE_CONTEXT"
-      - export RELEASE_NAME="branch-${{CF_BRANCH_TAG_NORMALIZED}}"
+      - export RELEASE_NAME="pr-${{CF_PULL_REQUEST_NUMBER}}"
       - helmfile apply

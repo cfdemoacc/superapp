@@ -10,7 +10,7 @@ steps:
   push_image:
     type: push
     candidate: '${{build_image}}'
-    tag: latest
+    tag: '${{CF_BRANCH_TAG_NORMALIZED}}'
 
   deploy_chart:
     image: cablespaghetti/helmfile-docker:0.0.3

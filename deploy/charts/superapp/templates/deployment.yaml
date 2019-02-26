@@ -20,11 +20,6 @@ spec:
       containers:
       - name: {{ .Chart.Name }}
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-        env:
-        - name: BG_COLOR
-          value: {{ .Values.bgColor | quote }}
-        - name: TEXT_COLOR
-          value: {{ .Values.textColor | quote }}
         ports:
         - name: http
           containerPort: 8080

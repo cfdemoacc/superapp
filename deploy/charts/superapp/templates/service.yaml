@@ -5,12 +5,12 @@ metadata:
   labels:
 {{ include "superapp.labels.standard" . | indent 4 }}
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
-  - port: 8080
-    targetPort: http
+  - name: http
+    port: 80
+    targetPort: 8080
     protocol: TCP
-    name: http
   selector:
     app: {{ template "superapp.name" . }}
     release: {{ .Release.Name | quote }}

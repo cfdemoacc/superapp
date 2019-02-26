@@ -2,6 +2,6 @@ lapis = require "lapis"
 
 class extends lapis.Application
   "/": =>
-    "Welcome 2 Lapis #{require "lapis.version"}!"
+    "Welcome 2222 Lapis #{require "lapis.version"}!"
   "/y": =>
     "But Y?"

@@ -4,4 +4,4 @@ releases:
     chart: ./charts/superapp
     values:
     - image:
-        tag: {{ env "DOCKER_TAG" | default "latest" }}
+        tag: {{ env "RELEASE_NAME" | default "latest" }}

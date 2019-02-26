@@ -1,0 +1,15 @@
+version: '1.0'
+
+stages:
+- undeploy
+
+steps:
+
+  undeploy_chart:
+    stage: undeploy
+    image: cablespaghetti/helmfile-docker:0.0.3
+    working_directory: ${{main_clone}}/deploy/
+    commands:
+      - kubectl config use-context "$KUBE_CONTEXT"
+      - export RELEASE_NAME="pr-${{CF_PULL_REQUEST_NUMBER}}"
+      - helm delete --purge $RELEASE_NAME

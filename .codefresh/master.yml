@@ -1,19 +1,27 @@
 version: '1.0'
 
+stages:
+  - build
+  - release
+  - deploy
+
 steps:
 
   build_image:
+    stage: build
     type: build
     image_name: cfdemoacc/superapp
     working_directory: ${{main_clone}}/app/
 
   push_image:
+    stage: release
     type: push
     candidate: '${{build_image}}'
     tag: 'branch-${{CF_BRANCH_TAG_NORMALIZED}}'
     registry: dockerhub
 
   deploy_chart:
+    stage: deploy
     image: cablespaghetti/helmfile-docker:0.0.3
     working_directory: ${{main_clone}}/deploy/
     commands:

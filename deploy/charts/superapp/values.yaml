@@ -1,0 +1,7 @@
+image:
+  repository: cfdemoacc/superapp
+  tag: latest
+
+bgColor: black
+textColor: "green"
+

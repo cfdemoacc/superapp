@@ -1,0 +1,4 @@
+releases:
+  - name: superapp-{{ env "CF_BRANCH_TAG_NORMALIZED" | default "local" }}
+    namespace: {{ env "CF_BRANCH_TAG_NORMALIZED" | default "local" }}
+    chart: ./charts/superapp

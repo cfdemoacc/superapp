@@ -1,0 +1,19 @@
+version: '1.0'
+
+steps:
+
+  build_image:
+    type: build
+    image_name: cfdemoacc/superapp
+    working_directory: ${{main_clone}}/app/
+
+  push_image:
+    type: push
+    candidate: '${{build_image}}'
+    tag: latest
+
+  deploy_chart:
+    image: cablespaghetti/helmfile-docker:0.0.3
+    working_directory: ${{main_clone}}/deploy/
+    commands:
+      - helmfile apply

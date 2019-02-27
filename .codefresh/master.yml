@@ -1,9 +1,9 @@
 version: '1.0'
 
 stages:
-  - build
-  - release
-  - deploy
+- build
+- release
+- deploy
 
 steps:
 
@@ -25,6 +25,6 @@ steps:
     image: cablespaghetti/helmfile-docker:0.0.3
     working_directory: ${{main_clone}}/deploy/
     commands:
-      - kubectl config use-context "$KUBE_CONTEXT"
-      - export NAMESPACE="branch-${{CF_BRANCH_TAG_NORMALIZED}}"
-      - helmfile apply
+    - kubectl config use-context "$KUBE_CONTEXT"
+    - export NAMESPACE="branch-${{CF_BRANCH_TAG_NORMALIZED}}"
+    - helmfile apply

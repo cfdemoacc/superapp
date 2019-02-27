@@ -1,9 +1,9 @@
 version: '1.0'
 
 stages:
-  - build
-  - release
-  - deploy
+- build
+- release
+- deploy
 
 steps:
 
@@ -25,6 +25,22 @@ steps:
     image: cablespaghetti/helmfile-docker:0.0.3
     working_directory: ${{main_clone}}/deploy/
     commands:
-      - kubectl config use-context "$KUBE_CONTEXT"
-      - export NAMESPACE="pr-${{CF_PULL_REQUEST_NUMBER}}"
-      - helmfile apply
+    - kubectl config use-context "$KUBE_CONTEXT"
+    - export NAMESPACE="pr-${{CF_PULL_REQUEST_NUMBER}}"
+    - helmfile apply
+
+  wait_for_endpoint:
+    stage: deploy
+    image: cablespaghetti/helmfile-docker:0.0.3
+    commands:
+    - external_ip=""; while [ -z $external_ip ]; do echo "Waiting for end point..."; external_ip=$(kubectl -n pr-${{CF_PULL_REQUEST_NUMBER}} get svc superapp-pr-${{CF_PULL_REQUEST_NUMBER}}-superapp --template="{{range .status.loadBalancer.ingress}}{{.ip}}{{end}}"); [ -z "$external_ip" ] && sleep 10; done; echo "End point ready-" && echo $external_ip; cf_export ENDPOINT=http://$external_ip
+
+  github_comment:
+    stage: deploy
+    image: cloudposse/github-commenter
+    environment:
+    - GITHUB_OWNER=cfdemoacc
+    - GITHUB_REPO=superapp
+    - GITHUB_COMMENT_TYPE=pr
+    - GITHUB_PR_ISSUE_NUMBER=${{CF_PULL_REQUEST_NUMBER}}
+    - GITHUB_COMMENT=${{ENDPOINT}}

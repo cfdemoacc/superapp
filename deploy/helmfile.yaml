@@ -4,4 +4,4 @@ releases:
     chart: ./charts/superapp
     values:
     - image:
-        tag: {{ env "NAMESPACE" | default "latest" }}
+        tag: {{ env "NAMESPACE" | default "local" }}

@@ -38,7 +38,7 @@ steps:
   github_comment:
     stage: deploy
     image: cloudposse/github-commenter
-    env:
+    environment:
     - GITHUB_OWNER=cfdemoacc
     - GITHUB_REPO=superapp
     - GITHUB_COMMENT_TYPE=pr

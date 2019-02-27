@@ -17,6 +17,7 @@ app:match("profile", "/:name", function(self)
     return self:html(function()
         div({class = "profile"},
             "Welcome to the profile of " .. self.params.name)
+        img({src = "https://avatars1.githubusercontent.com/u/47992697"})
     end)
 end)
 
